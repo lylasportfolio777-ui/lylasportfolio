@@ -1,0 +1,261 @@
+@import "tailwindcss";
+@source "../";
+
+@custom-variant data-open (&:is([data-state=open], [data-open]:not([data-open=false])));
+@custom-variant data-closed (&:is([data-state=closed], [data-closed]:not([data-closed=false])));
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* Direct hex values required — Tailwind v4 @theme does not support var() */
+  --color-background: #FAFAF7;
+  --color-foreground: #111111;
+  --color-muted: #555555;
+  --color-accent: #C9A96E;
+  --color-surface: #F0F0EE;
+  --color-card: #FFFFFF;
+  --color-border: rgba(17, 17, 17, 0.1);
+  --color-brand-white: #FFFFFF;
+  --color-brand-dark: #1C1D20;
+}
+
+@layer base {
+  :root {
+    /* Portfolio brand tokens — unique namespace, never overridden by shadcn */
+    --brand-bg: #F9F6F3; /* 🟢 CHANGE BACKGROUND COLOR HERE */
+    --brand-fg: #111111; /* 🟢 CHANGE TEXT COLOR HERE */
+    
+    --brand-white: #FFFFFF;
+    --brand-dark: #1C1D20;
+    --brand-muted: #555555;
+    --brand-accent: #C9A96E;
+    --brand-surface: #F0F0EE;
+    --brand-card: #FFFFFF;
+    --brand-light: #272727;
+    --brand-border: rgba(17, 17, 17, 0.1);
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  /* Hide default cursor only on non-touch / desktop */
+  @media (min-width: 768px) and (pointer: fine) {
+    body:not(.admin-panel) * {
+      cursor: none;
+    }
+  }
+
+  /* Force native cursor for admin panel */
+  .admin-panel, .admin-panel * {
+    cursor: auto !important;
+  }
+
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1, "ss01" 1;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+    font-weight: 400;
+    @apply bg-background text-foreground;
+  }
+
+  /* Hide scrollbars globally */
+  * {
+    -ms-overflow-style: none; /* IE and Edge */
+
+    scrollbar-width: none !important;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  ::selection {
+    background-color: #111111;
+    color: #FAFAF7;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  p {
+    letter-spacing: 0.01em;
+    line-height: 1.7;
+  }
+
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .clip-hidden {
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+  }
+  .clip-visible {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--brand-muted);
+    font-weight: 400 !important;
+  }
+
+  .editorial-divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--brand-border);
+  }
+
+  .link-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background-color: currentColor;
+    transition: width 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  .link-underline:hover::after {
+    width: 100%;
+  }
+
+  @keyframes scroll-down {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(200%); }
+  }
+  .animate-scroll-down {
+    animation: scroll-down 2s infinite ease-in-out;
+  }
+
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .grain-overlay::before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.7;
+  }
+
+  .title .word {
+    overflow: hidden;
+    padding-top: 0.2em;
+    margin-top: -0.2em;
+  }
+  .title .char {
+    display: inline-block;
+  }
+}
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: var(--font-sans);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--brand-accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--brand-muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--brand-fg);
+  --color-background: var(--brand-bg);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* shadcn system variables — kept for shadcn UI components only */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --radius: 0.625rem;
+
+  /* ✅ Portfolio brand overrides — these ALWAYS win because they come last */
+  --background: var(--brand-bg);
+  --foreground: var(--brand-fg);
+}
+
+/* Dark mode intentionally omitted — site uses a fixed light editorial palette */
