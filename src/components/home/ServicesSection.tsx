@@ -11,7 +11,7 @@ const hardcodedServices = [
   { id: 1, name: "Editorial Photography", category: "Fashion & Editorial", image_url: "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547568/samples/people/kitchen-bar.jpg" },
   { id: 2, name: "Commercial Campaigns", category: "Advertising & Commercial", image_url: "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547582/samples/look-up.jpg" },
   { id: 3, name: "Brand Identity", category: "Creative Direction", image_url: "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547581/samples/balloons.jpg" },
-  { id: 4, name: "Art Direction", category: "Visual Strategy", image_url: "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547569/samples/people/smiling-man.jpg" },
+  { id: 4, name: "Art Direction", category: "Visual Strategy", image_url: "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547581/samples/smile.jpg" },
   { id: 5, name: "Lookbook & Catalog", category: "Fashion Lookbook", image_url: "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547581/samples/smile.jpg" },
 ];
 

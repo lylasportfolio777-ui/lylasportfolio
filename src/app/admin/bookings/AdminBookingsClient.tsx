@@ -49,6 +49,7 @@ export default function AdminBookingsClient() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
+  const [sortView, setSortView] = useState<"upcoming" | "newest">("upcoming");
 
   // Reschedule Modal State
   const [rescheduleBooking, setRescheduleBooking] = useState<Booking | null>(null);
@@ -60,7 +61,7 @@ export default function AdminBookingsClient() {
   const fetchBookings = async () => {
     setIsLoading(true);
     try {
-      const url = `/api/admin/bookings?search=${encodeURIComponent(searchQuery)}`;
+      const url = `/api/admin/bookings?search=${encodeURIComponent(searchQuery)}&sort=${sortView}`;
       const res = await fetch(url);
       const data = await res.json();
       setBookings(data.bookings || []);
@@ -73,7 +74,7 @@ export default function AdminBookingsClient() {
 
   useEffect(() => {
     fetchBookings();
-  }, []);
+  }, [sortView]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -157,19 +158,23 @@ export default function AdminBookingsClient() {
 
 
   return (
-    <div className="min-h-screen bg-light text-dark pt-28 pb-20 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto flex flex-col gap-8">
+    <div className="min-h-screen bg-light text-dark pt-6 sm:pt-12 md:pt-28 pb-20 px-4 sm:px-6 md:px-12">
+      <div className="max-w-7xl mx-auto flex flex-col gap-6 md:gap-8">
         {/* HEADER */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-dark/10">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-6 pb-6 border-b border-dark/10">
           <div>
-            <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#C9A96E]">Supabase Core Database</span>
-            <h1 className="text-4xl md:text-5xl font-light text-dark uppercase tracking-tight">Bookings Management</h1>
+            <div className="flex items-center gap-3 mb-2">
+              <a href="/admin" className="text-xs font-mono uppercase tracking-widest text-[#C9A96E] hover:underline flex items-center gap-1">
+                ← Admin Dashboard
+              </a>
+            </div>
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-light text-dark uppercase tracking-tight">Bookings Management</h1>
           </div>
 
           <div className="flex items-center gap-3">
             <button
               onClick={fetchBookings}
-              className="p-3 rounded-full border border-dark/20 hover:bg-dark/5 transition-colors"
+              className="p-2.5 sm:p-3 rounded-full border border-dark/20 hover:bg-dark/5 transition-colors"
               title="Refresh Bookings"
             >
               <RefreshCw size={16} className={isLoading ? "animate-spin" : ""} />
@@ -177,12 +182,25 @@ export default function AdminBookingsClient() {
           </div>
         </div>
 
-        {/* CONTROLS: SEARCH & BOOKING COUNT */}
+        {/* CONTROLS: SEARCH, SORT, & COUNT */}
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <span className="text-sm font-mono uppercase tracking-wider text-dark/70">
-              Total Client Bookings: <strong className="text-dark font-semibold">{bookings.length}</strong>
-            </span>
+          <div className="flex items-center gap-2 bg-[#1C1D20]/5 p-1 rounded-full border border-dark/10 self-start md:self-auto">
+            <button
+              onClick={() => setSortView("upcoming")}
+              className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-widest transition-all ${
+                sortView === "upcoming" ? "bg-[#1C1D20] text-white shadow-md" : "text-dark/60 hover:text-dark"
+              }`}
+            >
+              Upcoming Shoots
+            </button>
+            <button
+              onClick={() => setSortView("newest")}
+              className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-widest transition-all ${
+                sortView === "newest" ? "bg-[#1C1D20] text-white shadow-md" : "text-dark/60 hover:text-dark"
+              }`}
+            >
+              New Inquiries
+            </button>
           </div>
 
           {/* Search Form */}
@@ -199,7 +217,7 @@ export default function AdminBookingsClient() {
         </div>
 
         {/* MAIN LIST VIEW */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
           {/* Bookings List Table */}
           <div className="lg:col-span-2 flex flex-col gap-4">
             {isLoading ? (
@@ -214,7 +232,7 @@ export default function AdminBookingsClient() {
                   key={b.id}
                   layout
                   onClick={() => setSelectedBooking(b)}
-                  className={`p-6 rounded-2xl border transition-all cursor-pointer flex flex-col gap-4 ${
+                  className={`p-4 sm:p-6 rounded-2xl border transition-all cursor-pointer flex flex-col gap-3 sm:gap-4 ${
                     selectedBooking?.id === b.id
                       ? "bg-white border-[#1C1D20] shadow-xl ring-1 ring-[#1C1D20]"
                       : "bg-[#FAFAF7] border-dark/10 hover:border-dark/30 hover:bg-white"
@@ -222,15 +240,15 @@ export default function AdminBookingsClient() {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <User size={16} className="text-[#C9A96E]" />
-                      <span className="text-base font-medium text-dark">{b.client_name}</span>
+                      <User size={16} className="text-[#C9A96E] shrink-0" />
+                      <span className="text-sm sm:text-base font-medium text-dark truncate">{b.client_name}</span>
                     </div>
-                    <span className="px-2.5 py-1 rounded-full text-[10px] font-mono bg-emerald-500/10 text-emerald-700 border border-emerald-500/20 font-semibold">
+                    <span className="px-2.5 py-1 rounded-full text-[10px] font-mono bg-emerald-500/10 text-emerald-700 border border-emerald-500/20 font-semibold shrink-0">
                       Booked
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono text-dark/70 border-y border-dark/5 py-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs font-mono text-dark/70 border-y border-dark/5 py-3">
                     <div className="flex items-center gap-2">
                       <CalendarIcon size={14} className="text-dark/40 shrink-0" />
                       <span>{b.booking_date}</span>
@@ -245,16 +263,11 @@ export default function AdminBookingsClient() {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between text-xs font-mono text-dark/50">
-                    <div className="flex items-center gap-2">
-                      <MapPin size={12} className="text-dark/40" />
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs font-mono text-dark/50">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <MapPin size={12} className="text-dark/40 shrink-0" />
                       <span className="truncate">{b.location}</span>
                     </div>
-                    {b.google_event_id && (
-                      <span className="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                        Synced to Google Calendar
-                      </span>
-                    )}
                   </div>
                 </motion.div>
               ))
@@ -282,9 +295,11 @@ export default function AdminBookingsClient() {
 
                   <div className="flex flex-col gap-4 text-xs font-mono">
                     <div>
-                      <span className="text-dark/40 text-[10px] block">SERVICE & EVENT</span>
+                      <span className="text-dark/40 text-[10px] block">SERVICE PACKAGE</span>
                       <span className="text-dark font-medium block text-sm">{selectedBooking.service}</span>
-                      <span className="text-dark/60 block">{selectedBooking.event_type}</span>
+                      {selectedBooking.event_type !== selectedBooking.service && (
+                        <span className="text-dark/60 block">{selectedBooking.event_type}</span>
+                      )}
                     </div>
 
                     <div>
@@ -306,18 +321,10 @@ export default function AdminBookingsClient() {
 
                     {selectedBooking.message && (
                       <div>
-                        <span className="text-dark/40 text-[10px] block">CLIENT NOTES</span>
-                        <p className="text-dark/80 italic font-sans text-xs bg-white/70 p-3 rounded-xl border border-dark/10">
+                        <span className="text-dark/40 text-[10px] block">PROJECT VISION & NOTES</span>
+                        <p className="text-dark/80 italic font-sans text-xs bg-white/70 p-3 rounded-xl border border-dark/10 mt-1">
                           "{selectedBooking.message}"
                         </p>
-                      </div>
-                    )}
-
-                    {selectedBooking.google_event_id && (
-                      <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-[11px] text-emerald-800">
-                        <strong>Google Calendar Event Active</strong>
-                        <br />
-                        Synced to Photographer's Google Calendar app on phone.
                       </div>
                     )}
                   </div>
@@ -424,7 +431,7 @@ export default function AdminBookingsClient() {
                   disabled={isRescheduling}
                   className="px-6 py-2.5 bg-[#1C1D20] text-white rounded-full hover:bg-[#C9A96E] transition-colors disabled:opacity-50"
                 >
-                  {isRescheduling ? "Updating..." : "Save & Sync Calendar"}
+                  {isRescheduling ? "Updating..." : "Save Changes"}
                 </button>
               </div>
             </motion.form>

@@ -30,7 +30,7 @@ const defaultProjects = [
     id: 4,
     title: "Urban Geometry",
     category: "Street",
-    image: "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547569/samples/people/smiling-man.jpg",
+    image: "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547581/samples/smile.jpg",
   },
   {
     id: 5,
@@ -122,7 +122,7 @@ export default function FeaturedProjects({ initialProjects = [] }: FeaturedProje
               }}
               className="relative group cursor-none overflow-hidden aspect-[4/5] bg-white"
             >
-              <Link href="/portfolio" className="block w-full h-full hover-target">
+              <Link href="/portfolio" className="relative block w-full h-full hover-target">
                 <Image
                   src={getOptimizedCloudinaryUrl(project.image || project.image_url, 600)}
                   alt={project.title}

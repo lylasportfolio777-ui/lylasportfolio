@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/utils/supabase/admin";
 import { checkDoubleBookingConflict } from "@/lib/availability";
-import {
-  updateGoogleCalendarEvent,
-  deleteGoogleCalendarEvent,
-} from "@/lib/google-calendar";
 
 export async function PATCH(
   request: NextRequest,
@@ -81,24 +77,6 @@ export async function PATCH(
         return NextResponse.json({ error: "Failed to reschedule booking." }, { status: 500 });
       }
 
-      // Sync existing Google Calendar event if present
-      if (updatedBooking.google_event_id) {
-        await updateGoogleCalendarEvent(updatedBooking.google_event_id, {
-          id: updatedBooking.id,
-          client_name: updatedBooking.client_name,
-          email: updatedBooking.email,
-          phone: updatedBooking.phone,
-          service: updatedBooking.service,
-          event_type: updatedBooking.event_type,
-          location: updatedBooking.location,
-          message: updatedBooking.message,
-          booking_date: updatedBooking.booking_date,
-          start_time: updatedBooking.start_time,
-          end_time: updatedBooking.end_time,
-          timezone: updatedBooking.timezone,
-        });
-      }
-
       return NextResponse.json(
         { message: "Booking rescheduled successfully.", booking: updatedBooking },
         { status: 200 }
@@ -124,11 +102,6 @@ export async function PATCH(
         return NextResponse.json({ error: "Failed to update booking status." }, { status: 500 });
       }
 
-      // If status is changed to cancelled, delete corresponding Google Calendar event
-      if (status === "cancelled" && existingBooking.google_event_id) {
-        await deleteGoogleCalendarEvent(existingBooking.google_event_id);
-      }
-
       return NextResponse.json(
         { message: `Booking status updated to ${status}.`, booking: updatedBooking },
         { status: 200 }
@@ -147,16 +120,6 @@ export async function DELETE(
   try {
     const { id } = await params;
     const supabase = createAdminClient();
-
-    const { data: existingBooking } = await supabase
-      .from("bookings")
-      .select("google_event_id")
-      .eq("id", id)
-      .single();
-
-    if (existingBooking?.google_event_id) {
-      await deleteGoogleCalendarEvent(existingBooking.google_event_id);
-    }
 
     const { error } = await supabase.from("bookings").delete().eq("id", id);
     if (error) {

@@ -20,7 +20,7 @@ export default function AboutSection({ config }: AboutSectionProps) {
     about_heading: config.about_heading || "A quiet obsession\nwith light\nand form.",
     about_text_p1: config.about_text_p1 || "I believe photography exists at the intersection of patience and instinct. Every frame I create begins with observation — studying how light shapes a space, how shadow carves depth, how a single moment can contain an entire story.",
     about_text_p2: config.about_text_p2 || "With over a decade behind the lens, my work spans editorial fashion, architectural documentation, and fine art photography. I shoot exclusively on medium format, preserving every nuance of tone and texture.",
-    about_image: config.about_image || "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547569/samples/people/smiling-man.jpg",
+    about_image: config.about_image || "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547581/samples/smile.jpg",
     about_caption_left: config.about_caption_left || "Self portrait, Paris 2025",
     about_caption_right: config.about_caption_right || "Hasselblad X2D",
     about_stat_1_val: config.about_stat_1_val || "12+",

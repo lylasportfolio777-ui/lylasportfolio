@@ -51,7 +51,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         project.image_url,
         "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547572/samples/people/bicycle.jpg",
         "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547577/samples/two-ladies.jpg",
-        "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547569/samples/people/smiling-man.jpg",
+        "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547581/samples/smile.jpg",
         "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547582/samples/man-on-a-street.jpg"
       ];
 

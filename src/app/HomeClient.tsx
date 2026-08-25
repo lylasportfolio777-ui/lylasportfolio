@@ -10,13 +10,10 @@ import AboutSection from "@/components/home/AboutSection";
 const FeaturedProjects = dynamic(() => import("@/components/home/FeaturedProjects"), {
   ssr: true,
 });
-const BehindTheScenes = dynamic(() => import("@/components/home/BehindTheScenes"), {
+const ServicesSection = dynamic(() => import("@/components/home/ServicesSection"), {
   ssr: true,
 });
 const TestimonialsSection = dynamic(() => import("@/components/home/TestimonialsSection"), {
-  ssr: true,
-});
-const ServicesSection = dynamic(() => import("@/components/home/ServicesSection"), {
   ssr: true,
 });
 const PricingSection = dynamic(() => import("@/components/home/PricingSection"), {
@@ -61,7 +58,6 @@ export default function HomeClient({
         <Hero config={config} />
         <AboutSection config={config} />
         <FeaturedProjects initialProjects={initialProjects} />
-        {/* <BehindTheScenes config={config} /> */}
         <ServicesSection initialServices={initialServices} />
         <TestimonialsSection initialTestimonials={initialTestimonials} />
         <PricingSection config={config} />

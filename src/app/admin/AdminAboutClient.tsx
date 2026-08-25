@@ -13,7 +13,7 @@ export default function AdminAboutClient({ initialConfig }: { initialConfig: Rec
     about_craft_p1: "Every project is approached as a bespoke artistic commission. We do not rely on standard templates or digital shortcuts. From pre-production mood boards and location scouting to custom lighting direction on set, every element is curated to evoke raw, timeless emotion.",
     about_craft_p2: "Utilizing high-resolution medium format systems alongside specialized vintage glass, we ensure maximum chromatic fidelity and dynamic range — crafting heirlooms meant to be appreciated across generations.",
     about_marquee_text: "Vogue • Harper's Bazaar • GQ • Vanity Fair",
-    about_image: "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547569/samples/people/smiling-man.jpg",
+    about_image: "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547581/samples/smile.jpg",
     about_caption_left: "Self portrait, Paris 2025",
     about_caption_right: "Hasselblad X2D",
     about_stat_1_val: "12+",

@@ -7,12 +7,17 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const status = searchParams.get("status");
     const search = searchParams.get("search");
+    const sort = searchParams.get("sort") || "newest";
 
     let query = supabase
       .from("bookings")
-      .select("*")
-      .order("booking_date", { ascending: true })
-      .order("start_time", { ascending: true });
+      .select("*");
+
+    if (sort === "upcoming") {
+      query = query.order("booking_date", { ascending: true }).order("start_time", { ascending: true });
+    } else {
+      query = query.order("created_at", { ascending: false });
+    }
 
     if (status && status !== "all") {
       query = query.eq("status", status);

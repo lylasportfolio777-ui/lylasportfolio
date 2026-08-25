@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { bookingFormSchema } from "@/lib/validation/booking";
 import { createAdminClient } from "@/utils/supabase/admin";
 import { checkDoubleBookingConflict } from "@/lib/availability";
-import { createGoogleCalendarEvent } from "@/lib/google-calendar";
 
 export async function POST(request: NextRequest) {
   try {
@@ -91,37 +90,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 5. Create Google Calendar Event (Convenient External Sync)
-    const googleEventResult = await createGoogleCalendarEvent({
-      id: createdBooking.id,
-      client_name: createdBooking.client_name,
-      email: createdBooking.email,
-      phone: createdBooking.phone,
-      service: createdBooking.service,
-      event_type: createdBooking.event_type,
-      location: createdBooking.location,
-      message: createdBooking.message,
-      booking_date: createdBooking.booking_date,
-      start_time: createdBooking.start_time,
-      end_time: createdBooking.end_time,
-      timezone: createdBooking.timezone,
-    });
-
-    // Save Google Event ID back to Supabase if created
-    if (googleEventResult) {
-      await supabase
-        .from("bookings")
-        .update({
-          google_event_id: googleEventResult.eventId,
-          google_calendar_id: googleEventResult.calendarId,
-        })
-        .eq("id", createdBooking.id);
-
-      createdBooking.google_event_id = googleEventResult.eventId;
-      createdBooking.google_calendar_id = googleEventResult.calendarId;
-    }
-
-    // 6. Return Booking Confirmation Response
+    // 5. Return Booking Confirmation Response
     return NextResponse.json(
       {
         message: "Booking confirmed successfully",

@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/utils/supabase/admin";
 import { settingsSchema } from "@/lib/validation/booking";
-import { getConnectedCalendarClient } from "@/lib/google-calendar";
 import { invalidateSettingsCache } from "@/lib/availability";
 
 export async function GET() {
@@ -14,18 +13,9 @@ export async function GET() {
       .eq("id", 1)
       .single();
 
-    // Check Google OAuth Connection status
-    const googleClient = await getConnectedCalendarClient();
-    const googleConnected = !!googleClient;
-    const googleEmail = googleClient?.connectedEmail || null;
-
     return NextResponse.json(
       {
         settings: dbSettings || {},
-        googleCalendar: {
-          connected: googleConnected,
-          email: googleEmail,
-        },
       },
       { status: 200 }
     );

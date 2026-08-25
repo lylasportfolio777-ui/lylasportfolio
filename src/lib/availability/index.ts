@@ -1,5 +1,4 @@
 import { createAdminClient } from "@/utils/supabase/admin";
-import { getGoogleCalendarBusyBlocks } from "@/lib/google-calendar";
 
 export interface TimeSlotAvailability {
   start: string; // "09:00"
@@ -145,15 +144,12 @@ export async function calculateAvailability(dateStr: string): Promise<Availabili
     };
   }
 
-  // 4. Fetch Supabase Bookings AND Google Calendar Busy Blocks IN PARALLEL
-  const [existingBookingsRes, googleBusyBlocks] = await Promise.all([
-    supabase
-      .from("bookings")
-      .select("start_time, end_time, status")
-      .eq("booking_date", dateStr)
-      .in("status", ["confirmed", "pending"]),
-    getGoogleCalendarBusyBlocks(dateStr, timezone),
-  ]);
+  // 4. Fetch Supabase Bookings
+  const existingBookingsRes = await supabase
+    .from("bookings")
+    .select("start_time, end_time, status")
+    .eq("booking_date", dateStr)
+    .in("status", ["confirmed", "pending"]);
 
   const existingBookings = existingBookingsRes.data || [];
   const activeBookingsCount = existingBookings.length;
@@ -169,18 +165,7 @@ export async function calculateAvailability(dateStr: string): Promise<Availabili
     };
   });
 
-  const googleRanges = googleBusyBlocks.map((g) => {
-    const gStartObj = new Date(g.start);
-    const gEndObj = new Date(g.end);
-    const startMin = gStartObj.getHours() * 60 + gStartObj.getMinutes();
-    const endMin = gEndObj.getHours() * 60 + gEndObj.getMinutes();
-    return {
-      start: startMin - bufferDuration,
-      end: endMin + bufferDuration,
-    };
-  });
-
-  // 6. Generate Potential Slots
+  // 5. Generate Potential Slots
   const workStartMin = timeToMinutes(dayConfig.start);
   const workEndMin = timeToMinutes(dayConfig.end);
   const slots: TimeSlotAvailability[] = [];
@@ -214,15 +199,6 @@ export async function calculateAvailability(dateStr: string): Promise<Availabili
       if (hasSupabaseConflict) {
         isAvailable = false;
         unavailableReason = "Slot already booked";
-      } else {
-        // Check overlap with Google Calendar busy events
-        const hasGoogleConflict = googleRanges.some(
-          (g) => Math.max(sMin, g.start) < Math.min(eMin, g.end)
-        );
-        if (hasGoogleConflict) {
-          isAvailable = false;
-          unavailableReason = "Photographer busy on Google Calendar";
-        }
       }
     }
 

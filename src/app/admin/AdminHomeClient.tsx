@@ -8,7 +8,7 @@ export default function AdminHomeClient({ initialConfig }: { initialConfig: Reco
   const [config, setConfig] = useState<Record<string, string>>(() => ({
     hero_title: "Emily Ratajkowski",
     hero_subtitle: "Cinematic editorial photography.\nParis — Worldwide.",
-    hero_image: "/images/bride-groom.jpg",
+    hero_image: "",
     ...initialConfig
   }));
   const [isSaving, setIsSaving] = useState(false);
