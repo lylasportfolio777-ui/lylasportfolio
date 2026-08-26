@@ -1,4 +1,4 @@
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://lylascreativeshots.com';
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://lylasportfolio.vercel.app';
 
 export const SEO_CONSTANTS = {
   title: "Lyla's Creative Shots | Put-in-Bay Portrait & Nature Photographer",
@@ -19,14 +19,14 @@ export const SEO_CONSTANTS = {
   },
   contact: {
     phone: '',
-    email: 'hello@lylascreativeshots.com'
+    email: 'lylascreativeshots@gmail.com'
   },
   geo: {
     latitude: '41.6534',
     longitude: '-82.8146'
   },
   socials: {
-    instagram: 'https://instagram.com/lylascreativeshots',
+    instagram: 'https://www.instagram.com/lylascreativeshots?igsi=M2hxdXZmdTh4Yjh3',
     facebook: 'https://facebook.com/lylascreativeshots',
     pinterest: 'https://pinterest.com/lylascreativeshots',
     linkedin: 'https://linkedin.com/in/lylasteidl'
