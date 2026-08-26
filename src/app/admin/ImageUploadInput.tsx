@@ -177,7 +177,8 @@ export default function ImageUploadInput({
 async function uploadSingleFile(file: File, cloudName: string): Promise<string> {
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("upload_preset", "aura_portfolio");
+  const preset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "aura_portfolio";
+  formData.append("upload_preset", preset);
 
   let res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
     method: "POST",
