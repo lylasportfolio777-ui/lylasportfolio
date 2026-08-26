@@ -2,7 +2,7 @@ import Gallery from "@/components/portfolio/Gallery";
 import Footer from "@/components/layout/Footer";
 import { createClient } from "@/utils/supabase/server";
 
-export const revalidate = 60; // Revalidate every 60s for static caching
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Portfolio | AURA",

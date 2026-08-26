@@ -6,7 +6,7 @@ import {
 } from "@/lib/getData";
 import HomeClient from "./HomeClient";
 
-export const revalidate = 60; // Revalidate every 60 seconds (ISR)
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const [config, featuredProjects, services, testimonials] = await Promise.all([
