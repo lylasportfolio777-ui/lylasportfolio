@@ -57,7 +57,7 @@ export default function AdminHomeClient({ initialConfig }: { initialConfig: Reco
             <label className="text-sm font-medium">{field.label}</label>
             <div className="flex gap-4">
               {field.type === "image" ? (
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <ImageUploadInput
                     value={config[field.key]}
                     onChange={(url) => handleChange(field.key, url)}

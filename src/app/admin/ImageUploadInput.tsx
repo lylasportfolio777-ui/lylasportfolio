@@ -108,7 +108,7 @@ export default function ImageUploadInput({
             <span className="text-sm font-medium">Uploading to Cloudinary...</span>
           </div>
         ) : value ? (
-          <div className="flex items-center gap-3 w-full">
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 w-full overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={value && value.includes("cloudinary.com") && value.includes("/upload/") && !value.includes("/upload/f_auto,q_auto") ? value.replace("/upload/", "/upload/f_auto,q_auto,w_200/") : value}
@@ -117,13 +117,13 @@ export default function ImageUploadInput({
               decoding="async"
               className="w-12 h-12 object-cover rounded-lg border border-border shadow-sm shrink-0"
             />
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 overflow-hidden">
               <p className="text-xs font-medium text-foreground truncate">{value}</p>
               <p className="text-[11px] text-green-600 font-semibold flex items-center gap-1 mt-0.5">
-                <Check className="w-3.5 h-3.5" /> Uploaded successfully
+                <Check className="w-3.5 h-3.5 shrink-0" /> Uploaded
               </p>
             </div>
-            <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto justify-end sm:justify-start mt-2 sm:mt-0">
               <button
                 type="button"
                 onClick={(e) => {
@@ -177,8 +177,7 @@ export default function ImageUploadInput({
 async function uploadSingleFile(file: File, cloudName: string): Promise<string> {
   const formData = new FormData();
   formData.append("file", file);
-  const preset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "aura_portfolio";
-  formData.append("upload_preset", preset);
+  formData.append("upload_preset", "aura_portfolio");
 
   let res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
     method: "POST",
