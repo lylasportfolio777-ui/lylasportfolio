@@ -10,6 +10,7 @@ import { getSiteConfig } from "@/lib/getConfig";
 import { constructMetadata } from "@/lib/seo/metadata";
 import { generateWebSiteSchema, generateLocalBusinessSchema } from "@/lib/seo/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { getOptimizedCloudinaryUrl } from "@/lib/cloudinary";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -23,7 +24,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return constructMetadata({
     title: "Lyla Steidl — Photography",
     description: "American photography. Specializing in family, maternity, newborn, senior, and couples portrait sessions as well as striking nature photography. Based in Put-in-Bay, Ohio.",
-    image: config.hero_image || "https://res.cloudinary.com/duk94ehtq/image/upload/v1784357918/eduardo-rodriguez-SgfN_bmO4rE-unsplash_cqjcdm.jpg"
+    image: config.hero_image 
+      ? getOptimizedCloudinaryUrl(config.hero_image, 1200, "good") 
+      : "https://res.cloudinary.com/duk94ehtq/image/upload/v1784357918/eduardo-rodriguez-SgfN_bmO4rE-unsplash_cqjcdm.jpg"
   });
 }
 
