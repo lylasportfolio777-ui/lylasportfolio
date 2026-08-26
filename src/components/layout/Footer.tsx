@@ -239,7 +239,7 @@ export default function Footer({ config = {} }: FooterProps) {
             {/* Social Links & Copyright Footer Bar */}
             <div className="flex flex-col sm:flex-row w-full justify-between items-center gap-4 mt-0 md:mt-auto pt-6 border-t border-white/10">
               <span className="text-white/40 text-[10px] tracking-[0.1em] uppercase font-mono">
-                © 2026 Émile Durand
+                © 2026 lyla's photography developed by <a href="https://www.instagram.com/ferbcode.ms?igsi=MWloNHF3d3hhZ3luNg==" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors duration-300 border-b border-transparent hover:border-white/30 pb-0.5">ferbcode.ms</a>
               </span>
               <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8">
                 {[
