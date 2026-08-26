@@ -184,70 +184,68 @@ export default function AdminDashboardClient({
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 220 }}
-              className="md:hidden fixed inset-y-0 left-0 z-50 w-[85vw] max-w-[320px] bg-background border-r border-border p-6 flex flex-col justify-between shadow-2xl overflow-hidden"
+              className="md:hidden fixed inset-y-0 left-0 z-50 w-[85vw] max-w-[320px] bg-background border-r border-border flex flex-col shadow-2xl"
             >
-              <div>
-                {/* Drawer Header */}
-                <div className="flex items-center justify-between pb-6 mb-4 border-b border-border">
-                  <div>
-                    <h2 className="text-lg font-light tracking-[0.1em] uppercase text-foreground">Studio Admin</h2>
-                    <p className="text-[10px] font-mono text-foreground/40 tracking-widest uppercase">Navigation</p>
-                  </div>
-                  <button
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 rounded-xl border border-border hover:bg-surface text-foreground"
-                    aria-label="Close Menu"
-                  >
-                    <X size={18} />
-                  </button>
+              {/* Drawer Header (Fixed) */}
+              <div className="p-6 pb-4 border-b border-border shrink-0 flex items-center justify-between">
+                <div>
+                  <h2 className="text-lg font-light tracking-[0.1em] uppercase text-foreground">Studio Admin</h2>
+                  <p className="text-[10px] font-mono text-foreground/40 tracking-widest uppercase">Navigation</p>
                 </div>
-
-                {/* Drawer Navigation Links */}
-                <nav className="flex flex-col gap-1 overflow-y-auto max-h-[calc(100vh-220px)] pr-1 custom-scrollbar">
-                  {tabs.map((tab) => {
-                    const Icon = tab.icon;
-                    const isActive = activeTab === tab.id;
-
-                    if (tab.href) {
-                      return (
-                        <Link
-                          key={tab.id}
-                          href={tab.href}
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          className="flex items-center justify-between px-3.5 py-3 text-xs font-medium rounded-xl text-foreground/70 hover:bg-surface hover:text-foreground transition-colors"
-                        >
-                          <div className="flex items-center gap-3">
-                            <Icon size={16} className="text-foreground/50" />
-                            <span>{tab.label}</span>
-                          </div>
-                          <ChevronRight size={14} className="text-foreground/30" />
-                        </Link>
-                      );
-                    }
-
-                    return (
-                      <button
-                        key={tab.id}
-                        onClick={() => handleTabClick(tab)}
-                        className={`flex items-center justify-between px-3.5 py-3 text-xs font-medium rounded-xl text-left transition-colors ${
-                          isActive
-                            ? "bg-foreground text-background font-semibold"
-                            : "text-foreground/70 hover:bg-surface hover:text-foreground"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <Icon size={16} className={isActive ? "text-background" : "text-foreground/50"} />
-                          <span>{tab.label}</span>
-                        </div>
-                        {isActive && <span className="w-1.5 h-1.5 rounded-full bg-background" />}
-                      </button>
-                    );
-                  })}
-                </nav>
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-2 rounded-xl border border-border hover:bg-surface text-foreground"
+                  aria-label="Close Menu"
+                >
+                  <X size={18} />
+                </button>
               </div>
 
-              {/* Drawer Sign Out Footer */}
-              <div className="pt-4 border-t border-border">
+              {/* Drawer Navigation Links (Scrollable) */}
+              <nav className="flex-1 overflow-y-auto p-4 flex flex-col gap-1 custom-scrollbar">
+                {tabs.map((tab) => {
+                  const Icon = tab.icon;
+                  const isActive = activeTab === tab.id;
+
+                  if (tab.href) {
+                    return (
+                      <Link
+                        key={tab.id}
+                        href={tab.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center justify-between px-3.5 py-3 text-xs font-medium rounded-xl text-foreground/70 hover:bg-surface hover:text-foreground transition-colors"
+                      >
+                        <div className="flex items-center gap-3">
+                          <Icon size={16} className="text-foreground/50" />
+                          <span>{tab.label}</span>
+                        </div>
+                        <ChevronRight size={14} className="text-foreground/30" />
+                      </Link>
+                    );
+                  }
+
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => handleTabClick(tab)}
+                      className={`flex items-center justify-between px-3.5 py-3 text-xs font-medium rounded-xl text-left transition-colors ${
+                        isActive
+                          ? "bg-foreground text-background font-semibold"
+                          : "text-foreground/70 hover:bg-surface hover:text-foreground"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Icon size={16} className={isActive ? "text-background" : "text-foreground/50"} />
+                        <span>{tab.label}</span>
+                      </div>
+                      {isActive && <span className="w-1.5 h-1.5 rounded-full bg-background" />}
+                    </button>
+                  );
+                })}
+              </nav>
+
+              {/* Drawer Sign Out Footer (Fixed) */}
+              <div className="p-4 border-t border-border shrink-0">
                 <form action={logout}>
                   <button
                     type="submit"
