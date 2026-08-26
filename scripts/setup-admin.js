@@ -1,4 +1,5 @@
-import { createClient } from '@supabase/supabase-js';
+const { createClient } = require('@supabase/supabase-js');
+require('dotenv').config({ path: '.env.local' });
 
 // This script uses the Service Role Key to safely bypass email verification 
 // and force-create an admin user for your dashboard.
@@ -16,8 +17,8 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 async function createAdminUser() {
   // ⬇️ CHANGE THESE TO YOUR PREFERRED ADMIN CREDENTIALS ⬇️
-  const adminEmail = 'admin@gmail.com';
-  const adminPassword = 'admin123';
+  const adminEmail = 'lylas2000@gmail.com';
+  const adminPassword = 'lylas@2000';
   
   console.log(`⏳ Attempting to create admin user: ${adminEmail}...`);
 

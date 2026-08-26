@@ -18,11 +18,14 @@ const manrope = Manrope({
   variable: "--font-sans",
 });
 
-export const metadata: Metadata = constructMetadata({
-  title: "Lyla Steidl — Photography",
-  description: "Award-winning photography portfolio. Specializing in family, maternity, newborn, senior, and couples portrait sessions as well as striking nature photography. Based in Put-in-Bay, Ohio.",
-  image: "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547568/samples/people/kitchen-bar.jpg"
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const config = await getSiteConfig();
+  return constructMetadata({
+    title: "Lyla Steidl — Photography",
+    description: "American photography. Specializing in family, maternity, newborn, senior, and couples portrait sessions as well as striking nature photography. Based in Put-in-Bay, Ohio.",
+    image: config.hero_image || "https://res.cloudinary.com/duk94ehtq/image/upload/v1784357918/eduardo-rodriguez-SgfN_bmO4rE-unsplash_cqjcdm.jpg"
+  });
+}
 
 export default async function RootLayout({
   children,
