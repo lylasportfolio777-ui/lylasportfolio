@@ -74,7 +74,7 @@ export default function PricingSection({ config }: PricingSectionProps) {
           .from("site_config")
           .select("value")
           .eq("key", "pricing_plans")
-          .single();
+          .maybeSingle();
 
         if (configData?.value) {
           const parsed = JSON.parse(configData.value);
