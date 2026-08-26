@@ -45,7 +45,7 @@ export default function AdminHomeClient({ initialConfig }: { initialConfig: Reco
         <button
           disabled={isSaving}
           onClick={handleSaveAll}
-          className="bg-foreground border-1 hover:bg-surface border-border text-background px-6 py-2 rounded-lg text-sm font-medium hover:opacity-90 disabled:opacity-50 transition-all duration-200 ease-in-out"
+          className="bg-foreground text-background px-6 py-2 rounded-lg text-sm font-medium hover:opacity-90 disabled:opacity-50 transition-all duration-200 ease-in-out"
         >
           {isSaving ? "Saving..." : "Save All Settings"}
         </button>
