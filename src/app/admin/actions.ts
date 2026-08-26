@@ -75,9 +75,10 @@ export async function deleteProject(id: string) {
 
 export async function addProject(data: { title: string; category: string; year: string; image_url: string; description?: string; gallery_urls?: string[]; }) {
   const supabase = await createClient();
-  const { error } = await supabase.from("projects").insert([data]);
+  const { data: newProject, error } = await supabase.from("projects").insert([data]).select().single();
   if (error) throw new Error(error.message);
   revalidatePath("/", "layout");
+  return newProject;
 }
 
 // --- SERVICES ---

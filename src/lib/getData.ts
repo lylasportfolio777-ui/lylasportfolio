@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/server";
  * Cached server-side helper to fetch all site_config rows.
  * Deduplicated per request using React.cache().
  */
-export const getSiteConfig = cache(async (): Promise<Record<string, string>> => {
+export const getSiteConfig = async (): Promise<Record<string, string>> => {
   try {
     const supabase = await createClient();
     const { data } = await supabase.from("site_config").select("*");
@@ -19,17 +19,17 @@ export const getSiteConfig = cache(async (): Promise<Record<string, string>> => 
     console.error("Failed to fetch site config:", error);
     return {};
   }
-});
+};
 
 /**
  * Cached server-side helper to fetch featured projects.
  */
-export const getFeaturedProjects = cache(async (limit = 6) => {
+export const getFeaturedProjects = async (limit = 6) => {
   try {
     const supabase = await createClient();
     const { data } = await supabase
       .from("projects")
-      .select("id, title, category, image_url, aspect_ratio, created_at")
+      .select("id, title, category, image_url, created_at")
       .order("created_at", { ascending: false })
       .limit(limit);
 
@@ -45,12 +45,12 @@ export const getFeaturedProjects = cache(async (limit = 6) => {
     console.error("Failed to fetch featured projects:", error);
     return [];
   }
-});
+};
 
 /**
  * Cached server-side helper to fetch services.
  */
-export const getServices = cache(async () => {
+export const getServices = async () => {
   try {
     const supabase = await createClient();
     const { data } = await supabase
@@ -63,12 +63,12 @@ export const getServices = cache(async () => {
     console.error("Failed to fetch services:", error);
     return [];
   }
-});
+};
 
 /**
  * Cached server-side helper to fetch testimonials.
  */
-export const getTestimonials = cache(async () => {
+export const getTestimonials = async () => {
   try {
     const supabase = await createClient();
     const { data } = await supabase
@@ -81,4 +81,4 @@ export const getTestimonials = cache(async () => {
     console.error("Failed to fetch testimonials:", error);
     return [];
   }
-});
+};

@@ -9,12 +9,11 @@ import HomeClient from "./HomeClient";
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [config, featuredProjects, services, testimonials] = await Promise.all([
-    getSiteConfig(),
-    getFeaturedProjects(),
-    getServices(),
-    getTestimonials(),
-  ]);
+  // Fetch sequentially instead of Promise.all to prevent Next.js cookies() async context bugs
+  const config = await getSiteConfig();
+  const featuredProjects = await getFeaturedProjects();
+  const services = await getServices();
+  const testimonials = await getTestimonials();
 
   return (
     <HomeClient 

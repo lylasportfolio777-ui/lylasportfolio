@@ -62,9 +62,17 @@ export default function AdminProjectsClient({
       return;
     }
     try {
-      await addProject(newProject);
-      alert("Project added successfully!");
-      window.location.reload(); 
+      const createdProject = await addProject(newProject);
+      setProjects([createdProject, ...projects]);
+      setNewProject({ 
+        title: "", 
+        category: initialCategories.length > 0 ? initialCategories[0].name : "", 
+        year: "", 
+        image_url: "",
+        description: "",
+        gallery_urls: []
+      });
+      setIsAdding(false);
     } catch (e: any) {
       alert("Failed to add project: " + e.message);
     }

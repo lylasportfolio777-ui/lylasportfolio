@@ -66,8 +66,8 @@ export default function FeaturedProjects({ initialProjects = [] }: FeaturedProje
   const containerRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Only use real projects if available, otherwise use defaults. Limit to 8 items for the design.
-  const dynamicProjects = (initialProjects.length > 0 ? initialProjects : defaultProjects).slice(0, 8);
+  // Never use defaults. Only show real projects from the database.
+  const dynamicProjects = initialProjects.slice(0, 8);
 
   useEffect(() => {
     const ctx = gsap.context(() => {

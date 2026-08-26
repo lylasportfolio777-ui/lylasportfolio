@@ -13,7 +13,7 @@ export default async function PortfolioPage() {
   const supabase = await createClient();
   const { data: rawProjects } = await supabase
     .from("projects")
-    .select("id, title, category, image_url, aspect_ratio, created_at")
+    .select("id, title, category, image_url, created_at")
     .order("created_at", { ascending: false });
 
   const initialProjects = (rawProjects || []).map((p) => ({
