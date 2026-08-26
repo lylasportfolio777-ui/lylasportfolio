@@ -28,7 +28,7 @@ export default function ProjectClient({ project, gallery }: ProjectClientProps) 
   const yHero = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacityHero = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
-  const optimizedHeroUrl = getOptimizedCloudinaryUrl(project.image_url, 1920);
+  const optimizedHeroUrl = getOptimizedCloudinaryUrl(project.image_url, 2400);
 
   return (
     <main ref={containerRef} className="min-h-screen bg-light text-dark selection:bg-dark selection:text-light relative">
@@ -54,7 +54,8 @@ export default function ProjectClient({ project, gallery }: ProjectClientProps) 
             fetchPriority="high"
             className="object-cover"
             sizes="100vw"
-            quality={85}
+            quality={100}
+            unoptimized
           />
           <div className="absolute inset-0 bg-black/40" />
         </motion.div>
@@ -108,13 +109,14 @@ export default function ProjectClient({ project, gallery }: ProjectClientProps) 
               className="relative w-full aspect-[3/4] overflow-hidden bg-black/5 rounded-sm"
             >
               <Image
-                src={getOptimizedCloudinaryUrl(img, 1000)}
+                src={getOptimizedCloudinaryUrl(img)}
                 alt={`${project.title} Image ${idx + 1}`}
                 fill
                 loading="lazy"
                 className="object-cover hover:scale-105 transition-transform duration-700"
                 sizes="(max-width: 768px) 100vw, 50vw"
-                quality={80}
+                quality={100}
+                unoptimized
               />
             </motion.div>
           ))}

@@ -124,12 +124,13 @@ export default function FeaturedProjects({ initialProjects = [] }: FeaturedProje
             >
               <Link href="/portfolio" className="relative block w-full h-full hover-target">
                 <Image
-                  src={getOptimizedCloudinaryUrl(project.image || project.image_url, 1200)}
+                  src={getOptimizedCloudinaryUrl(project.image || project.image_url)}
                   alt={project.title}
                   fill
                   className="object-cover transition-all duration-[1.2s] ease-[0.19,1,0.22,1] group-hover:scale-105 group-hover:brightness-90"
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
                   quality={100}
+                  unoptimized
                 />
                 
                 {/* Premium Hover Overlay */}

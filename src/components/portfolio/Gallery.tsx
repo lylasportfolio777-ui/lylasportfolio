@@ -98,7 +98,7 @@ export default function Gallery({ initialProjects = [] }: GalleryProps) {
                 <Link href={`/portfolio/${project.id}`} className="block w-full h-full">
                   <div className={`relative w-full overflow-hidden ${project.aspect || "aspect-[3/4]"} bg-foreground/5 rounded-sm`}>
                     <Image
-                      src={getOptimizedCloudinaryUrl(project.image || project.image_url, 1200)}
+                      src={getOptimizedCloudinaryUrl(project.image || project.image_url)}
                       alt={project.title}
                       fill
                       priority={index < 3}
@@ -107,6 +107,7 @@ export default function Gallery({ initialProjects = [] }: GalleryProps) {
                       className="object-cover scale-105 transition-transform duration-700 group-hover:scale-100"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       quality={100}
+                      unoptimized
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                       <h3 className="text-xl md:text-2xl text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{project.title}</h3>

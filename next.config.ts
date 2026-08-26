@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     // Cache optimized images for 31 days at the CDN edge
     minimumCacheTTL: 2678400,
-    qualities: [60, 75, 80, 85, 90],
+    qualities: [60, 75, 80, 85, 90, 100],
     // Common responsive breakpoints
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 64, 128, 256],
