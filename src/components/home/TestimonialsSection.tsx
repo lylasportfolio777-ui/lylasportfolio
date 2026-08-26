@@ -53,8 +53,8 @@ export default function TestimonialsSection({ initialTestimonials = [] }: Testim
   const [activeIndex, setActiveIndex] = useState(0);
   const textRef = useRef<HTMLDivElement>(null);
 
-  // Use 6 testimonials for the grid layout
-  const testimonials = (initialTestimonials.length >= 6 ? initialTestimonials : hardcodedTestimonials).slice(0, 6);
+  // Use real testimonials if available, otherwise fallback to hardcoded
+  const testimonials = initialTestimonials.length > 0 ? initialTestimonials : hardcodedTestimonials;
   const activeTestimonial = testimonials[activeIndex] || testimonials[0];
 
   useEffect(() => {
@@ -140,9 +140,9 @@ export default function TestimonialsSection({ initialTestimonials = [] }: Testim
             {/* Minimal Logo Placeholder */}
             <div className="flex items-center gap-2 opacity-80">
               <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                <span className="text-white font-serif font-bold text-lg">É</span>
+                <span className="text-white font-serif font-bold text-lg"></span>
               </div>
-              <span className="font-mono text-sm tracking-widest uppercase">Émile</span>
+              <span className="font-mono text-sm tracking-widest uppercase">lyla</span>
             </div>
 
             <div ref={textRef} className="flex-grow flex flex-col justify-between">
