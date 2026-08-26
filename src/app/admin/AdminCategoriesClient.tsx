@@ -28,9 +28,10 @@ export default function AdminCategoriesClient({ initialCategories }: { initialCa
     e.preventDefault();
     if (!newCategory.trim()) return;
     try {
-      await addCategory(newCategory.trim());
-      alert("Category added successfully!");
-      window.location.reload();
+      const newCat = await addCategory(newCategory.trim());
+      setCategories([...categories, newCat]);
+      setNewCategory("");
+      setIsAdding(false);
     } catch (e: any) {
       alert("Failed to add category: " + e.message);
     }

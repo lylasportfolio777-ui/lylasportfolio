@@ -153,7 +153,8 @@ export async function deleteCategory(id: string) {
 
 export async function addCategory(name: string) {
   const supabase = await createClient();
-  const { error } = await supabase.from("project_categories").insert([{ name }]);
+  const { data, error } = await supabase.from("project_categories").insert([{ name }]).select().single();
   if (error) throw new Error(error.message);
   revalidatePath("/", "layout");
+  return data;
 }
