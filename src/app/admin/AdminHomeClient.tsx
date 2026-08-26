@@ -6,8 +6,8 @@ import ImageUploadInput from "./ImageUploadInput";
 
 export default function AdminHomeClient({ initialConfig }: { initialConfig: Record<string, string> }) {
   const [config, setConfig] = useState<Record<string, string>>(() => ({
-    hero_title: "Emily Ratajkowski",
-    hero_subtitle: "Cinematic editorial photography.\nParis — Worldwide.",
+    hero_title: "Lyla Steidl",
+    hero_subtitle: "Portrait & Nature Photography.\nPut-in-Bay, Ohio.",
     hero_image: "",
     ...initialConfig
   }));

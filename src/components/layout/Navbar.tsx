@@ -28,7 +28,7 @@ export default function Navbar({ config = {} }: NavbarProps) {
     { text: "LinkedIn", href: config.social_linkedin || "#" },
   ];
 
-  const rawName = config.site_name || config.hero_title || "Emily Ratajkowski";
+  const rawName = config.site_name || config.hero_title || "Lyla Steidl";
   const siteName = rawName.replace(/[\r\n]+/g, " ");
 
   const toggleNav = useCallback(() => {

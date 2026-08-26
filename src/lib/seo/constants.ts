@@ -1,34 +1,34 @@
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.emilyratajkowski.com';
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://lylascreativeshots.com';
 
 export const SEO_CONSTANTS = {
-  title: 'Emily Ratajkowski | Luxury Wedding & Portrait Photographer',
-  description: 'Award-winning wedding, engagement, and portrait photographer based in the United States. Capturing timeless, editorial, and elegant moments.',
-  siteName: 'Emily Ratajkowski Photography',
+  title: "Lyla's Creative Shots | Put-in-Bay Portrait & Nature Photographer",
+  description: 'Professional photographer based in Put-in-Bay, Ohio. Specializing in family, maternity, newborn, senior, and couples portrait sessions as well as striking nature photography.',
+  siteName: "Lyla's Creative Shots",
   locale: 'en_US',
   type: 'website',
   themeColor: '#1C1D20',
-  twitterHandle: '@emrata',
-  author: 'Emily Ratajkowski',
-  keywords: ['Wedding Photographer', 'Engagement Photography', 'Portrait Photographer', 'Luxury Weddings US', 'Editorial Photographer', 'Event Photography', 'Fine Art Photography'],
+  twitterHandle: '@lylascreativeshots',
+  author: 'Lyla Steidl',
+  keywords: ['Put-in-Bay Photographer', 'Ohio Photographer', 'Family Portraits', 'Senior Portraits', 'Maternity Photography', 'Newborn Photography', 'Nature Photography', "Lyla Steidl", "Lyla's Creative Shots", "Lake Erie Photographer"],
   address: {
-    streetAddress: '123 Photography Lane',
-    addressLocality: 'New York',
-    addressRegion: 'NY',
-    postalCode: '10001',
+    streetAddress: '',
+    addressLocality: 'Put-in-Bay',
+    addressRegion: 'OH',
+    postalCode: '43456',
     addressCountry: 'US'
   },
   contact: {
-    phone: '+1-555-123-4567',
-    email: 'hello@emilyratajkowski.com'
+    phone: '',
+    email: 'hello@lylascreativeshots.com'
   },
   geo: {
-    latitude: '40.7128',
-    longitude: '-74.0060'
+    latitude: '41.6534',
+    longitude: '-82.8146'
   },
   socials: {
-    instagram: 'https://instagram.com/emrata',
-    facebook: 'https://facebook.com/emrata',
-    pinterest: 'https://pinterest.com/emrata',
-    linkedin: 'https://linkedin.com/in/emrata'
+    instagram: 'https://instagram.com/lylascreativeshots',
+    facebook: 'https://facebook.com/lylascreativeshots',
+    pinterest: 'https://pinterest.com/lylascreativeshots',
+    linkedin: 'https://linkedin.com/in/lylasteidl'
   }
 };

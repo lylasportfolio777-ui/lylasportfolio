@@ -32,7 +32,7 @@ export default function Preloader({ onComplete, config }: PreloaderProps) {
     config["preloader_image_6"] || DEFAULT_IMAGES[5],
   ];
 
-  const preloaderText = config["preloader_text"] || "Emily Ratajkowski";
+  const preloaderText = config["preloader_text"] || "Lyla Steidl";
 
   useEffect(() => {
     let titleSplit: SplitType | null = null;

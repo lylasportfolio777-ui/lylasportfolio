@@ -19,8 +19,8 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = constructMetadata({
-  title: "Emily Ratajkowski — Photography",
-  description: "Award-winning photography portfolio. Cinematic editorial photography, fashion, architecture, and fine art. Based in Paris.",
+  title: "Lyla Steidl — Photography",
+  description: "Award-winning photography portfolio. Specializing in family, maternity, newborn, senior, and couples portrait sessions as well as striking nature photography. Based in Put-in-Bay, Ohio.",
   image: "https://res.cloudinary.com/duk94ehtq/image/upload/v1761547568/samples/people/kitchen-bar.jpg"
 });
 

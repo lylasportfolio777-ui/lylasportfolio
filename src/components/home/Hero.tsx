@@ -19,10 +19,10 @@ export default function Hero({ config }: HeroProps) {
     () => ({
       title: config.hero_title
         ? config.hero_title.replace(" ", "\n")
-        : "Emily\nRatajkowski",
+        : "Lyla\nSteidl",
       subtitle:
         config.hero_subtitle ||
-        "Cinematic editorial photography \n Paris — Worldwide.",
+        "Portrait & Nature Photography \n Put-in-Bay, Ohio.",
       image:
         config.hero_image ||
         "https://res.cloudinary.com/duk94ehtq/image/upload/v1784357918/eduardo-rodriguez-SgfN_bmO4rE-unsplash_cqjcdm.jpg",

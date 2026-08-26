@@ -15,7 +15,7 @@ const DEFAULT_IMAGES = [
 
 export default function AdminPreloaderClient({ initialConfig }: { initialConfig: Record<string, string> }) {
   const [config, setConfig] = useState<Record<string, string>>(() => ({
-    preloader_text: "Emily Ratajkowski",
+    preloader_text: "Lyla Steidl",
     preloader_image_1: DEFAULT_IMAGES[0],
     preloader_image_2: DEFAULT_IMAGES[1],
     preloader_image_3: DEFAULT_IMAGES[2],
