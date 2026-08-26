@@ -37,7 +37,7 @@ export const getFeaturedProjects = async (limit = 6) => {
     return data.map((p, index) => ({
       ...p,
       image: p.image_url,
-      aspect: p.aspect_ratio || "aspect-[4/5]",
+      aspect: "aspect-[4/5]",
       gridSpan: "col-span-1 md:col-span-4",
       offset: index % 3 === 0 ? "md:mt-0" : index % 3 === 1 ? "md:mt-16" : "md:mt-32",
     }));

@@ -19,7 +19,7 @@ export default async function PortfolioPage() {
   const initialProjects = (rawProjects || []).map((p) => ({
     ...p,
     image: p.image_url,
-    aspect: p.aspect_ratio || "aspect-[3/4]",
+    aspect: "aspect-[3/4]",
   }));
 
   return (
