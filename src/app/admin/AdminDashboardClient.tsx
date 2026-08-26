@@ -123,17 +123,17 @@ export default function AdminDashboardClient({
               </button>
             );
           })}
+          
+          {/* Sign Out Button in Nav */}
+          <div className="mt-2 pt-2 border-t border-border">
+            <form action={logout}>
+              <button type="submit" className="group flex items-center gap-3.5 px-4 py-3 text-[13px] font-medium rounded-xl w-full text-left text-red-500 hover:bg-red-500/10 transition-colors">
+                <LogOut size={16} className="group-hover:-translate-x-1 transition-transform shrink-0" />
+                <span className="tracking-wide">Sign Out</span>
+              </button>
+            </form>
+          </div>
         </nav>
-
-        {/* Sidebar Footer with Logout */}
-        <div className="pt-6 mt-auto border-t border-border">
-          <form action={logout}>
-            <button type="submit" className="group flex items-center gap-3.5 px-4 py-3 text-[13px] font-medium rounded-xl w-full text-left text-red-500 hover:bg-red-500/10 transition-colors">
-              <LogOut size={16} className="group-hover:-translate-x-1 transition-transform shrink-0" />
-              <span className="tracking-wide">Sign Out</span>
-            </button>
-          </form>
-        </div>
       </aside>
 
       {/* High-End Mobile Top Header Bar */}
@@ -242,20 +242,20 @@ export default function AdminDashboardClient({
                     </button>
                   );
                 })}
-              </nav>
 
-              {/* Drawer Sign Out Footer (Fixed) */}
-              <div className="p-4 border-t border-border shrink-0">
-                <form action={logout}>
-                  <button
-                    type="submit"
-                    className="flex items-center gap-3 w-full px-3.5 py-3 text-xs font-medium rounded-xl text-red-500 hover:bg-red-500/10 transition-colors"
-                  >
-                    <LogOut size={16} />
-                    <span>Sign Out</span>
-                  </button>
-                </form>
-              </div>
+                {/* Sign Out Button in Nav */}
+                <div className="mt-2 pt-2 border-t border-border">
+                  <form action={logout}>
+                    <button
+                      type="submit"
+                      className="flex items-center gap-3 w-full px-3.5 py-3 text-xs font-medium rounded-xl text-red-500 hover:bg-red-500/10 transition-colors"
+                    >
+                      <LogOut size={16} />
+                      <span>Sign Out</span>
+                    </button>
+                  </form>
+                </div>
+              </nav>
             </motion.aside>
           </>
         )}
